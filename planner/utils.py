@@ -8,7 +8,7 @@ ORS_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImE2ZjE4YWExNDQ3M
 OWM_API = "https://api.openweathermap.org/data/2.5/weather"
 OWM_KEY = "a080e7112eb3353ac60d2029e6a67c13"
 
-GEODB_API = "http://geodb-free-service.wirefreethought.com/v1/geo/countries/CA/regions/BC/cities?limit=100"
+GEODB_API = "http://geodb-free-service.wirefreethought.com/v1/geo/countries/CA/regions/BC/cities?limit=10"
 
 # --- Functions ---
 
