@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from geoapp.views import home, history  
+from planner.views import home, history  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
