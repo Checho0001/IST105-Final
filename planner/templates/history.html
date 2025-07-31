@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Route History</title>
+</head>
+<body>
+    <h1>Route History</h1>
+    <a href="{% url 'home' %}">← Back to Home</a>
+    <ul>
+        {% for query in saved_queries %}
+            <li>
+                <strong>{{ query.start_city }} → {{ query.end_city }}</strong><br>
+                Distance: {{ query.route_summary.distance_km }} km |
+                Duration: {{ query.route_summary.duration_min }} min<br>
+                Time: {{ query.timestamp }}<br>
+                Start Weather: {{ query.start_weather.weather.0.description }} |
+                End Weather: {{ query.end_weather.weather.0.description }}
+                <hr>
+            </li>
+        {% empty %}
+            <li>No saved queries found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Travel Planner</title>
+</head>
+<body>
+    <h1>Smart Travel Planner for BC Cities</h1>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if mongo_error %}
+        <p style="color: orange;">{{ mongo_error }}</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="start_city">Start City:</label>
+        <select name="start_city" id="start_city">
+            <option value="">Select</option>
+            {% for city in cities %}
+                <option value="{{ city }}" {% if city == start_city %}selected{% endif %}>{{ city }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="end_city">End City:</label>
+        <select name="end_city" id="end_city">
+            <option value="">Select</option>
+            {% for city in cities %}
+                <option value="{{ city }}" {% if city == end_city %}selected{% endif %}>{{ city }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Get Route</button>
+    </form>
+
+    {% if distance_km and duration_min %}
+        <h2>Route Summary</h2>
+        <p><strong>From:</strong> {{ start_city }} <strong>To:</strong> {{ end_city }}</p>
+        <p><strong>Distance:</strong> {{ distance_km }} km</p>
+        <p><strong>Duration:</strong> {{ duration_min }} minutes</p>
+
+        <h3>Weather</h3>
+        <p><strong>{{ start_city }}:</strong> {{ weather_start.weather.0.description }} | Temp: {{ weather_start.main.temp }}K</p>
+        <p><strong>{{ end_city }}:</strong> {{ weather_end.weather.0.description }} | Temp: {{ weather_end.main.temp }}K</p>
+
+        <h3>Advice</h3>
+        <p>{{ advice }}</p>
+
+        <h3>Steps</h3>
+        <ul>
+            {% for step in steps %}
+                <li>{{ step.instruction }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <a href="{% url 'history' %}">View Route History</a>
+
+</body>
+</html>
